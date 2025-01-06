@@ -171,9 +171,10 @@ export class MainYouthComponent implements OnInit {
 
   openDetailsModal(job: any): void {
     console.log(job)
+    console.log(this.detailsselectedJob)
     this.isDetailsModalOpen = true;
     this.selectedJob = job;
-    
+
   }
 
   closeDetailsModal(): void {
