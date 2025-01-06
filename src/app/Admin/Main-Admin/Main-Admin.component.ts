@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy  } from '@angular/core';
 import { SmartTableComponent } from '../../Common/smart-table/smart-table.component';
 import { CommonModule } from '@angular/common';
 import { AdminDashboardComponent } from '../Dashboard-Admin/Dashboard-Admin.component';
@@ -15,13 +15,15 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './Main-Admin.component.html',
   styleUrls: ['./Main-Admin.component.css']
 })
-export class MainAdminComponent implements OnInit {
+export class MainAdminComponent implements OnInit, OnDestroy {
   @Input() status: string | undefined;
   showModal: boolean = false;  // Controls the visibility of the modal
 
 
   activeTab: string = 'dashboard';
-  activeYouthTab: string = 'accepted';
+  activeYouthTab: string = 'waiting';
+  activeYouthTab1: string = 'waiting-E';
+  activeEmployerTab:string='active';
   generatedCode: string = "";
   errorMessage: string | null = null;
   generatedCodes: string[] = []; // Store generated codes for display in a table
@@ -29,7 +31,11 @@ export class MainAdminComponent implements OnInit {
 
   constructor(private http: HttpClient, private codeService: VerificationCodeService, private dialog: MatDialog) { }
 
-
+  ngOnDestroy(): void {
+    // Clear localStorage when leaving the Admin component
+    localStorage.removeItem('role');
+    console.log('Admin component destroyed, role removed from localStorage.');
+  }
   generateCode() {
     this.codeService.generateCode().subscribe({
       next: (response) => {
@@ -78,6 +84,8 @@ export class MainAdminComponent implements OnInit {
     // Load saved tab states from localStorage on initialization
     const savedTab = localStorage.getItem('activeTab');
     const savedYouthTab = localStorage.getItem('activeYouthTab');
+    const savedYouthTab1 = localStorage.getItem('activeYouthTab1');
+    const savedEmployerTab = localStorage.getItem('activeEmployerTab');
 
     if (savedTab) {
       this.activeTab = savedTab;
@@ -85,12 +93,29 @@ export class MainAdminComponent implements OnInit {
     if (savedYouthTab) {
       this.activeYouthTab = savedYouthTab;
     }
+    if (savedYouthTab1) {
+      this.activeYouthTab1 = savedYouthTab1;
+    };
+    if (savedEmployerTab) {
+      this.activeEmployerTab = savedEmployerTab;
+    };
+    localStorage.setItem('role', 'admin');
+    localStorage.setItem('authenticated', 'true');
   }
 
   changeYouthTab(tab: string): void {
     this.activeYouthTab = tab;
     localStorage.setItem('activeYouthTab', tab); // Save youth tab state to localStorage
   }
+  changeYouthTab1(tab: string): void {
+    this.activeYouthTab1 = tab;
+    localStorage.setItem('activeYouthTab1', tab); // Save youth tab state to localStorage
+  }
+  changeEmployerTab(tab: string): void {
+    this.activeEmployerTab = tab;
+    localStorage.setItem('activeEmployerTab', tab); // Save youth tab state to localStorage
+  }
+
 
   changeTab(tab: string): void {
     this.activeTab = tab;

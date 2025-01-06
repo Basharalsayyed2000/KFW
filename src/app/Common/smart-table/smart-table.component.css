@@ -10,6 +10,8 @@
   z-index: 1050 !important; /* Ensure it appears above other elements */
   max-height: 300px; /* Prevent the panel from being too tall */
   overflow-y: auto; /* Add scroll if needed */
+  width: -webkit-fill-available;
+
 }
 
 ::ng-deep .p-multiselect-item {
@@ -34,6 +36,7 @@
   overflow: visible !important;
   z-index: 1050 !important;
 }
+
 .parent-container {
   position: relative !important;
 }
@@ -46,3 +49,14 @@
 :host ::ng-deep .p-dialog .p-dialog-footer {
   padding: 0 !important;
 }
+
+:host ::ng-deep .youth .p-dialog .p-dialog-header {
+  padding: 15px !important;
+}
+:host ::ng-deep .youth .p-dialog .p-dialog-content {
+  padding: 15px !important;
+}
+:host ::ng-deep .youth .p-dialog .p-dialog-footer {
+  padding: 15px !important;
+}
+

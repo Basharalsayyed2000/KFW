@@ -1,4 +1,5 @@
 export interface Youth {
+  isEdited?:boolean;
   id: string;
   username: string;
   password: string;
@@ -75,6 +76,9 @@ export interface Youth {
 
   status: 'accepted' | 'rejected' | 'pending' | 'waiting';
   notes?:string;
-  jobCategory?:string;
+  appliedJob?: { job: string; status: string }[]; // Updated to hold job and status
+  beneficiary?:boolean;
+  createdAt:string;
+  workStatus?: boolean;
 
 }

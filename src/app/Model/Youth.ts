@@ -2,10 +2,13 @@
 export interface Youth {
   [key: string]: any; // Add this line for dynamic indexing
 
+  isEdited?:boolean;
+
   id: string;
   username: string;
   password: string;
   role: string;
+  beneficiary?:boolean;
 
   // Personal Information
   firstNameEn: string;
@@ -77,5 +80,7 @@ export interface Youth {
   confirmation: string;
   status: 'accepted' | 'rejected' | 'pending';
   notes?:string;
-  jobCategory?:string;
+  jobCategory?:string[];
+  appliedJob?: { title: string; req: string; status: string; date: string , jobRequestId?: string}[]; // Updated to hold job and status
+  workStatus?: boolean;
 }

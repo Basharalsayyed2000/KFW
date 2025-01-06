@@ -12,11 +12,18 @@ import {
   updateYouth,
   updateYouthExperience,
   updateYouthTraining,
-  updateJob,
   updateYouthNotes,
   getYouthNotesById,
   updateYouthCamp,
+  getAppliedJobById,
+  getYouthByJob,
+  updateAppliedJob,
+  updateJob,
+  updateYouthIsEdited,
+  getYouthIsEditedStatusById,
+
 } from '../controllers/youthController';
+// import { assignYouthToJob } from '../controllers/jobRequestController';
 
 const router = Router();
 
@@ -46,8 +53,15 @@ router.put('/:id/trainings', updateYouthTraining);
 router.delete('/:id', deleteYouth);
 router.patch('/:id/notes', updateYouthNotes);
 router.get('/:id/notes', getYouthNotesById);
+router.get('/:id/appliedJob', getAppliedJobById);
+router.get('/appliedJob/:appliedJob', getYouthByJob);
 router.patch('/:id/status', updateYouthStatus);
-router.patch('/:id/jobCategory', updateJob);
+// Add this route to update the appliedJob for a specific youth
+router.put('/:id/jobCategory', updateJob);
+
+// router.post('/jobs/:jobId/:youthId', assignYouthToJob);
 router.post('/check-registration', checkRegistrationNumber);
+router.patch('/:id/isEdited', updateYouthIsEdited);
+router.get('/:id/isEdited', getYouthIsEditedStatusById);
 
 export default router;

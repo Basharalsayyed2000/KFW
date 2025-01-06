@@ -9,30 +9,53 @@ import { MainYouthComponent } from './Youth/Main-Youth/Main-Youth.component';
 import { DetailsEmployerComponent } from './Employer/Details-Employer/details-employer.component';
 import { YouthprofileComponent } from '../app/Youth/youthprofile/youthprofile.component';
 import { EmployerprofileComponent } from './Employer/employerprofile/employerprofile.component';
+import { JobRequestComponent } from './Employer/JobRequestEdit/job-request.component';
+import { JobRequestDetailsComponent } from './Employer/JobRequestDetails/job-request-details.component';
+import { candeactivateAdminGuard } from './guards/candeactivate-admin.guard';
+import { HomeComponent } from './Common/home/home.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   { path: 'youthprofile/:id', component: YouthprofileComponent },
-
+  { path: 'job-request/:id', component: JobRequestComponent },
   {
     path: 'login',
     component: LoginComponent,
   },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
 
   {
     path:'main-admin',
-    component: MainAdminComponent
+    component: MainAdminComponent,
+    canDeactivate: [candeactivateAdminGuard] // Use the guard here
+
+  },
+  {
+    path: 'job-request-details/:id',
+    component: JobRequestDetailsComponent,
+  },
+  {
+    path: 'job-request-details',
+    component: JobRequestDetailsComponent,
   },
   {
     path: 'main-employer',
     component: MainEmployerComponent,
   },
+
   {
     path: 'main-youth',
+    component: MainYouthComponent,
+  },
+  {
+    path: 'main-youth/:id',
     component: MainYouthComponent,
   },
   { path: 'youthprofile/:id', component: YouthprofileComponent },
@@ -49,6 +72,7 @@ export const routes: Routes = [
   },
   { path: 'youthsignup-details', component: YouthSignupDetailsComponent }, // Add this route
   { path: 'details-employer', component: DetailsEmployerComponent },
+  { path: 'youthsignup-details/:id', component: YouthSignupDetailsComponent }, // Add this route
 
 {
   path: 'employerprofile',
@@ -63,5 +87,5 @@ export const routes: Routes = [
     component: MainAdminComponent, // Parent for steps
   }
 
-  
+
 ];
