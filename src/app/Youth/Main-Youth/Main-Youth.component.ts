@@ -460,3 +460,4 @@ export class MainYouthComponent implements OnInit {
     this.showNote = true;
   }
 }
+
